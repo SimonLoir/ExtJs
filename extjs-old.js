@@ -1,37 +1,5 @@
-/* ExtJs v2 with old browser support */
-
-function $(e){
-	return new EXTJS_MAIN(e);
-}
-
 function EXTJS_MAIN(element){
-	var re;
-	/*
-	Getting the element
-	*/
-	if (typeof(element) === "string") {
-		re = document.querySelector(element);
-	}else if(element == undefined || element == document){
-		
-		this.ready = function(toDo){
-			document.addEventListener("DOMContentLoaded", toDo);
-		}
-		return this;
-	}else if(typeof(element) === "object"){
-		re = element;
-	}else if(element.type == "ExtJsObject"){
-		return element;
-	}else{
-		return false;
-	}
 
-	this.type = "ExtJsObject"; // type d'objet 
-	this.dom = re; //L'objet DOM
-	this.node = re; //L'objet DOM
-
-	/*
-		d�finir la hauteur de l'�l�ment ou la r�cup�rer
-	*/ 
 	this.height = function(value){
 		if (value !== undefined) {
 			this.dom.style.height = value;

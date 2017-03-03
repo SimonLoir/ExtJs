@@ -12,7 +12,7 @@ function ExtJsObject(element, e_index){
         }
 	}else if(element == undefined || element == document){
         /**
-		 * @param {function} toDo function that is called when the document has been loaded
+		 * @param {Function} toDo function that is called when the document has been loaded
 		 */
 		this.ready = function(toDo){
 			document.addEventListener("DOMContentLoaded", toDo);
@@ -50,5 +50,135 @@ function ExtJsObject(element, e_index){
             }
         }
         return this;
+	}
+}
+
+var AR = new ExtJsAjaxRequestObject();
+
+function ExtJsAjaxRequestObject(){
+
+	/**
+     * @param {String} url URL of the resource
+     * @param {Function} func function which is called when the request has been performed correctly
+     * @param {Function} error function which is called when the request has not been performed correctly
+     */
+	this.GET = function (url, func, error) {
+		var xhttp = new XMLHttpRequest();
+  		xhttp.onreadystatechange = function() {
+    		if (xhttp.readyState == 4 && xhttp.status == 200) {
+    			func(xhttp.responseText);
+    		} else if (xhttp.readyState == 4) {
+
+    		    if (error != undefined) {
+    		        try {
+    		            error();
+    		        } catch (e) {
+
+    		        }
+    		    }
+
+    		}
+    	}
+  		xhttp.open("GET", url, true);
+  		xhttp.send();
+	}
+    /**
+     * @param {String} url URL of the resource
+     * @param {Function} func function which is called when the request has been performed correctly
+     * @param {Function} error function which is called when the request has not been performed correctly
+     */
+	this.DELETE = function (url, func, error) {
+		var xhttp = new XMLHttpRequest();
+
+  		xhttp.onreadystatechange = function() {
+    		if (xhttp.readyState == 4 && xhttp.status == 200) {
+    			func(xhttp.responseText);
+    		} else if (xhttp.readyState == 4) {
+
+    		    if (error != undefined) {
+    		        try {
+    		            error();
+    		        } catch (e) {
+
+    		        }
+    		    }
+
+    		}
+    	}
+  		xhttp.open("GET", url, true);
+  		xhttp.setRequestHeader("x-http-method-override", "DELETE");
+
+  		xhttp.send();
+	}
+	/**
+     * @param {String} url URL of the resource
+     * @param {Array} data assoc array with the data that will be sent
+     * @param {Function} func function which is called when the request has been performed correctly
+     * @param {Function} error function which is called when the request has not been performed correctly
+     */
+	this.POST = function (url, data ,func, error) {
+		var xhttp = new XMLHttpRequest();
+  		xhttp.onreadystatechange = function() {
+  		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+  		        func(xhttp.responseText);
+  		    } else if (xhttp.readyState == 4) {
+
+  		        if (error != undefined) {
+  		            try {
+  		                error();
+  		            } catch (e) {
+
+  		            }
+  		        }
+
+            }
+    	}
+  		xhttp.open("POST", url, true);
+  		var keys = 	Object.keys(data);
+  		var d = "";
+  		for (var i = 0; i < keys.length; i++) {
+  			 if (i !== 0 ) {
+  			 	d = d + "&";
+  			 }
+  			 d = d + keys[i] + "=" + data[keys[i]];
+  		}
+  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  		xhttp.send(d);
+	}
+    /**
+     * @param {String} url URL of the resource
+     * @param {Array} data assoc array with the data that will be sent
+     * @param {Function} func function which is called when the request has been performed correctly
+     * @param {Function} error function which is called when the request has not been performed correctly
+     */
+	this.PUT = function (url, data ,func, error) {
+		var xhttp = new XMLHttpRequest();
+  		xhttp.onreadystatechange = function() {
+  		    if (xhttp.readyState == 4 && xhttp.status == 200) {
+  		        func(xhttp.responseText);
+  		    } else if (xhttp.readyState == 4) {
+
+  		        if (error != undefined) {
+  		            try {
+  		                error();
+  		            } catch (e) {
+
+  		            }
+  		        }
+
+            }
+    	}
+  		xhttp.open("POST", url, true);
+  		var keys = 	Object.keys(data);
+  		var d = "";
+  		for (var i = 0; i < keys.length; i++) {
+  			 if (i !== 0 ) {
+  			 	d = d + "&";
+  			 }
+  			 d = d + keys[i] + "=" + data[keys[i]];
+  		}
+  		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  		xhttp.setRequestHeader("x-http-method-override", "PUT");
+  		xhttp.send(d);
 	}
 }
