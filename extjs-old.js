@@ -18,35 +18,6 @@ function EXTJS_MAIN(element){
 		}
 	}
 
-	/*
-		Click event on this
-	 */
-	
-	this.click = function(toDo, element){
-		if (element === undefined) {
-			if (toDo !== undefined) {
-				this.dom.addEventListener("click", toDo);
-				return this;
-			}else{
-				this.dom.click();
-			}
-		}else if (toDo !== undefined){
-			var x = this.dom;
-			this.dom.addEventListener("click", function(event){
-				if (x.querySelector(element) == event.target) {
-					xe = x.querySelector(element);
-					xe.toDo = toDo;
-					xe.toDo();
-				}
-			});
-		}else{
-			var x = this.dom;
-			xe = x.querySelector(element);
-			xe.click();
-		}
-	}
-
-
 	this.addClass =  function(classx){
 		this.dom.classList.add(classx);
 		return this;

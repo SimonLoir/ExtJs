@@ -51,9 +51,48 @@ function ExtJsObject(element, e_index) {
 		}
 		return this;
 	}
+
+	/**
+	 * @param {Function|Undefined} toDo function that is called when somebody click on the element  or undefined or nothing
+	 * @param  {String|Undefined} element specifies the element on which we are going to listen the click.
+	 */
+	
+	this.click = function (toDo, element) {
+
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+
+			if (element === undefined) {
+				if (toDo !== undefined) {
+					e.addEventListener("click", toDo);
+
+				} else {
+					e.click();
+				}
+			} else if (toDo !== undefined) {
+				var x = e;
+				e.addEventListener("click", function (event) {
+					if (x.querySelector(element) == event.target) {
+						xe = x.querySelector(element);
+						xe.toDo = toDo;
+						xe.toDo();
+					}
+				});
+			} else {
+				var x = e;
+				xe = x.querySelector(element);
+				xe.click();
+			}
+
+		}
+		return this;
+	}
+
 }
 
-var AR = new ExtJsAjaxRequestObject();
+
+
+var AR = new ExtJsAjaxRequestObject(); // AjaxRequest with ExtJs
 
 function ExtJsAjaxRequestObject() {
 
