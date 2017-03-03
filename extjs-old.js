@@ -12,6 +12,7 @@ function EXTJS_MAIN(element){
 	if (typeof(element) === "string") {
 		re = document.querySelector(element);
 	}else if(element == undefined || element == document){
+		
 		this.ready = function(toDo){
 			document.addEventListener("DOMContentLoaded", toDo);
 		}
@@ -76,15 +77,7 @@ function EXTJS_MAIN(element){
 			xe.click();
 		}
 	}
-	
-	this.html = function(string){
-		if (typeof(string) === "string" || typeof(string) === "number") {
-			this.dom.innerHTML = string;
-			return this;
-		}else{
-			return this.dom.innerHTML;
-		}
-	}
+
 
 	this.addClass =  function(classx){
 		this.dom.classList.add(classx);
