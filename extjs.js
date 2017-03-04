@@ -88,6 +88,21 @@ function ExtJsObject(element, e_index) {
 		return this;
 	}
 
+	/**
+	 * @param {Number|String} index index of the element or undefined or nothing
+	 * @return {Object} a DOM element
+	 */
+
+	this.get = function (index) {
+		if(index != undefined){
+			if(this.node[index] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[" + index + "]");
+			return this.node[index];
+		}else{
+			if(this.node[0] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[0]");
+			return this.node[0];
+		}
+	}
+
 }
 
 
@@ -220,4 +235,12 @@ function ExtJsAjaxRequestObject() {
 		xhttp.setRequestHeader("x-http-method-override", "PUT");
 		xhttp.send(d);
 	}
+}
+
+
+/* Exceptions */
+
+function IndexOutOfArrayExecption (message){
+	this.message = message;
+	this.name = "IndexOutOfArrayExecption";
 }

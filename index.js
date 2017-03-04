@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $('.test').click(function () {
-       console.log($(this).node);
-    
+       
+        $(this).get(undefined).style.color = "red";
+
     });
 });
