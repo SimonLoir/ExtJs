@@ -1,7 +1,11 @@
 $(document).ready(function () {
     $('.test').click(function () {
-       
-        $(this).get().style.color = "red";
+
+        try{
+            $('.test').get(5);
+        }catch(e){
+            console.log(e);
+        }
 
     });
 });

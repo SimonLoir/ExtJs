@@ -1,17 +1,7 @@
-/**
- * Return an instance of ExtJsObject
- * @param {*} e 
- * @param {String|Number} index 
- */
 function $(e, index) {
 	return new ExtJsObject(e, index);
 }
-/**
- * Return an ExtJs Object
- * @constructor
- * @param {*} element 
- * @param {String|Number} e_index 
- */
+
 function ExtJsObject(element, e_index) {
 	var re;
 
@@ -66,7 +56,7 @@ function ExtJsObject(element, e_index) {
 	 * @param {Function|Undefined} toDo function that is called when somebody click on the element  or undefined or nothing
 	 * @param  {String|Undefined} element specifies the element on which we are going to listen the click.
 	 */
-	
+
 	this.click = function (toDo, element) {
 
 		for (var i = 0; i < this.node.length; i++) {
@@ -104,13 +94,44 @@ function ExtJsObject(element, e_index) {
 	 */
 
 	this.get = function (index) {
-		if(index != undefined){
-			if(this.node[index] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[" + index + "]");
+		if (index != undefined) {
+			if (this.node[index] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[" + index + "]");
 			return this.node[index];
-		}else{
-			if(this.node[0] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[0]");
+		} else {
+			if (this.node[0] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[0]");
 			return this.node[0];
 		}
+	}
+
+	/**
+	 * @param {String} value the height of the element (and units (em / px / cm, etc)) or undefined or nothing
+	 * @return {Object|Number} Object if value != undefined and Number if value == undefined
+	 */
+	this.height = function (value) {
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			if (value !== undefined) {
+				e.style.height = value;
+			} else {
+				return e.offsetHeight;
+			}
+		}
+		return this;
+	}
+	/**
+	 * @param {String} value the width of the element (and units (em / px / cm, etc)) or undefined or nothing
+	 * @return {Object|Number} Object if value != undefined and Number if value == undefined
+	 */
+	this.width = function (value) {
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			if (value !== undefined) {
+				e.style.width = value;
+			} else {
+				return e.offsetWidth;
+			}
+		}
+		return this;
 	}
 
 }
@@ -250,7 +271,7 @@ function ExtJsAjaxRequestObject() {
 
 /* Exceptions */
 
-function IndexOutOfArrayExecption (message){
+function IndexOutOfArrayExecption(message) {
 	this.message = message;
-	this.name = "IndexOutOfArrayExecption";
+	this.name = "IndexOutOfArrayException";
 }

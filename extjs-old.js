@@ -1,23 +1,5 @@
 function EXTJS_MAIN(element){
 
-	this.height = function(value){
-		if (value !== undefined) {
-			this.dom.style.height = value;
-		}else{
-			return this.dom.offsetHeight;
-		}
-	}
-	/*
-		d�finir la longueur de l'�l�ment ou la r�cup�rer
-	*/
-	this.width = function(value){
-		if (value !== undefined) {
-			this.dom.style.width = value;
-		}else{
-			return this.dom.offsetWidth;
-		}
-	}
-
 	this.addClass =  function(classx){
 		this.dom.classList.add(classx);
 		return this;
