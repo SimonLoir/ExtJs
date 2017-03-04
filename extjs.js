@@ -1,7 +1,17 @@
+/**
+ * Return an instance of ExtJsObject
+ * @param {*} e 
+ * @param {String|Number} index 
+ */
 function $(e, index) {
 	return new ExtJsObject(e, index);
 }
-
+/**
+ * Return an ExtJs Object
+ * @constructor
+ * @param {*} element 
+ * @param {String|Number} e_index 
+ */
 function ExtJsObject(element, e_index) {
 	var re;
 
