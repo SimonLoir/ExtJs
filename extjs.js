@@ -1,5 +1,10 @@
 function $(e, index) {
-	return new ExtJsObject(e, index);
+	this.ajax = new ExtJsAjaxRequestObject(); 
+	if(e != undefined){
+		return new ExtJsObject(e, index);
+	}else{
+		return this;
+	}
 }
 
 function ExtJsObject(element, e_index) {
@@ -56,7 +61,6 @@ function ExtJsObject(element, e_index) {
 	 * @param {Function|Undefined} toDo function that is called when somebody click on the element  or undefined or nothing
 	 * @param  {String|Undefined} element specifies the element on which we are going to listen the click.
 	 */
-
 	this.click = function (toDo, element) {
 
 		for (var i = 0; i < this.node.length; i++) {
@@ -92,7 +96,6 @@ function ExtJsObject(element, e_index) {
 	 * @param {Number|String} index index of the element or undefined or nothing
 	 * @return {Object} a DOM element
 	 */
-
 	this.get = function (index) {
 		if (index != undefined) {
 			if (this.node[index] == undefined) throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[" + index + "]");
@@ -118,6 +121,7 @@ function ExtJsObject(element, e_index) {
 		}
 		return this;
 	}
+
 	/**
 	 * @param {String} value the width of the element (and units (em / px / cm, etc)) or undefined or nothing
 	 * @return {Object|Number} Object if value != undefined and Number if value == undefined
@@ -130,6 +134,32 @@ function ExtJsObject(element, e_index) {
 			} else {
 				return e.offsetWidth;
 			}
+		}
+		return this;
+	}
+
+	/**
+     * @param {String} classx class to add to the classlist of the element
+     * @return {Object} the current instance of ExtJs
+     */
+	this.addClass =  function(classx){
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			e.classList.add(classx);
+
+		}
+		return this;
+	}
+
+	/**
+     * @param {String} classx class to remove from the classlist of the element
+     * @return {Object} the current instance of ExtJs
+     */
+	this.removeClass =  function(classx){
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			e.classList.remove(classx);
+
 		}
 		return this;
 	}

@@ -1,15 +1,5 @@
 function EXTJS_MAIN(element){
 
-	this.addClass =  function(classx){
-		this.dom.classList.add(classx);
-		return this;
-	}
-
-	this.removeClass =  function(classx){
-		this.dom.classList.remove(classx);
-		return this;
-	}
-
 	this.remove =  function () {
 		this.dom.parentElement.removeChild(this.dom);
 	}
