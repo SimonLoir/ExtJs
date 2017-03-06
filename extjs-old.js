@@ -1,23 +1,11 @@
 function EXTJS_MAIN(element){
 
-	this.remove =  function () {
-		this.dom.parentElement.removeChild(this.dom);
-	}
-
-	this.addChild =  function (child) {
-	    this.dom.parentElement.appendChild(child);
-	}
-
 	this.css =  function (prop, value) {
 		if (value != undefined) {
 			this.dom.style[prop] = value;
 		}else{
 			return this.dom.style[prop];
 		}
-	}
-
-	this.clear =  function (){
-		this.html('');
 	}
 
 	this.child =  function(element_type){

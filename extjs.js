@@ -164,6 +164,30 @@ function ExtJsObject(element, e_index) {
 		return this;
 	}
 
+	/**
+	 * Delete the element(s)
+     */
+	this.remove =  function(){
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			e.parentElement.removeChild(e);
+
+		}
+	}
+	/**
+	 * @param {String} element_type element to createElement
+	 * @return {Array} element list in an ExtJsObject
+	 */
+	this.child =  function(element_type){
+		var e_list = [];
+		for (var i = 0; i < this.node.length; i++) {
+			var e = this.node[i];
+			var elem  = document.createElement(element_type);
+			e.appendChild(elem);
+			e_list.push(elem);
+		}
+		return $(e_list);
+	}
 }
 
 
