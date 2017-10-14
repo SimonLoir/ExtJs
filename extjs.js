@@ -193,17 +193,17 @@ function ExtJsObject(element, e_index) {
      * @param {String} value The value that we want to assign to that property 
      * @param {Number} i the index of the element (optional)
      */
-    this.css = function(prop, value, i){
+    this.css = function(prop, value, i) {
         var y = i;
-        if(i == undefined){
+        if (i == undefined) {
             i = 0;
         }
-        if(value == undefined){
+        if (value == undefined) {
             return this.node[i].style[prop];
-        }else if(y != undefined){
+        } else if (y != undefined) {
             this.node[i].style[prop] = value;
             return this;
-        }else{
+        } else {
             for (var i = 0; i < this.node.length; i++) {
                 var e = this.node[i];
                 e.style[prop] = value;
