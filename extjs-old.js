@@ -1,13 +1,5 @@
 function EXTJS_MAIN(element){
 
-    this.css =  function (prop, value) {
-        if (value != undefined) {
-            this.dom.style[prop] = value;
-        }else{
-            return this.dom.style[prop];
-        }
-    }
-
     this.child =  function(element_type){
         var elem  = document.createElement(element_type);
         this.node.appendChild(elem);
