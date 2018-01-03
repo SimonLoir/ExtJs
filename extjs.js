@@ -85,7 +85,7 @@ function ExtJsObject(element, e_index) {
     }
 
     /**
-     * @param {Function|Undefined} toDo function that is called when somebody click on the element  or undefined or nothing
+     * @param {Function|Undefined} toDo function that is called when somebody clicks on the element  or undefined or nothing
      * @param  {String|Undefined} element specifies the element on which we are going to listen the click.
      */
     this.click = function (toDo, element) {
