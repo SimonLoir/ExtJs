@@ -1,11 +1,13 @@
-function IndexOutOfArrayExecption(message) {
-    this.message = message;
-    this.name = "IndexOutOfArrayException";
+class IndexOutOfArrayExecption {
+    constructor(message) {
+        this.message = message;
+        this.name = 'IndexOutOfArrayException';
+    }
 }
 class ExtJsObject {
     constructor(element, e_index) {
         var re;
-        if (typeof (element) === "string") {
+        if (typeof element === 'string') {
             re = document.querySelectorAll(element);
             if (e_index != undefined) {
                 re = [re[e_index]];
@@ -13,11 +15,11 @@ class ExtJsObject {
         }
         else if (element == undefined || element == document) {
             this.ready = function (toDo) {
-                document.addEventListener("DOMContentLoaded", toDo);
+                document.addEventListener('DOMContentLoaded', toDo);
             };
             return this;
         }
-        else if (typeof (element) === "object") {
+        else if (typeof element === 'object') {
             if (element.length == undefined) {
                 re = [element];
             }
@@ -28,20 +30,20 @@ class ExtJsObject {
                 re = element;
             }
         }
-        else if (element.type == "ExtJsObject") {
+        else if (element.type == 'ExtJsObject') {
             return element;
         }
         else {
             return;
         }
-        this.type = "ExtJsObject";
+        this.type = 'ExtJsObject';
         this.node = re;
     }
     html(html) {
         if (html != undefined) {
             for (var i = 0; i < this.node.length; i++) {
                 var e = this.node[i];
-                if (typeof (html) === "string" || typeof (html) === "number") {
+                if (typeof html === 'string' || typeof html === 'number') {
                     e.innerHTML = html;
                 }
             }
@@ -51,12 +53,26 @@ class ExtJsObject {
             return this.node[0].innerHTML;
         }
     }
+    text(text) {
+        if (text != undefined) {
+            for (var i = 0; i < this.node.length; i++) {
+                var e = this.node[i];
+                if (typeof text === 'string' || typeof text === 'number') {
+                    e.innerText = text;
+                }
+            }
+            return this;
+        }
+        else {
+            return this.node[0].innerText;
+        }
+    }
     click(toDo, element) {
         for (var i = 0; i < this.node.length; i++) {
             var e = this.node[i];
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener("click", toDo);
+                    e.addEventListener('click', toDo);
                 }
                 else {
                     e.click();
@@ -64,7 +80,7 @@ class ExtJsObject {
             }
             else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener("click", function (event) {
+                e.addEventListener('click', function (event) {
                     if (x.querySelector(element) == event.target) {
                         let xe = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -80,17 +96,100 @@ class ExtJsObject {
         }
         return this;
     }
+    dblclick(toDo, element) {
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            if (element === undefined) {
+                if (toDo !== undefined) {
+                    e.addEventListener('dblclick', toDo);
+                }
+                else {
+                    e.dblclick();
+                }
+            }
+            else if (toDo !== undefined) {
+                var x = e;
+                e.addEventListener('dblclick', function (event) {
+                    if (x.querySelector(element) == event.target) {
+                        let xe = x.querySelector(element);
+                        xe.prototype.toDo = toDo;
+                        xe.toDo();
+                    }
+                });
+            }
+            else {
+                var x = e;
+                let xe = x.querySelector(element);
+                xe.dblclick();
+            }
+        }
+        return this;
+    }
+    hover(toDo, element) {
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            if (element === undefined) {
+                if (toDo !== undefined) {
+                    e.addEventListener('mouseover', toDo);
+                }
+                else {
+                    e.click();
+                }
+            }
+            else if (toDo !== undefined) {
+                var x = e;
+                e.addEventListener('mouseover', function (event) {
+                    if (x.querySelector(element) == event.target) {
+                        let xe = x.querySelector(element);
+                        xe.prototype.toDo = toDo;
+                        xe.toDo();
+                    }
+                });
+            }
+        }
+        return this;
+    }
+    leave(toDo, element) {
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            if (element === undefined) {
+                if (toDo !== undefined) {
+                    e.addEventListener('mouseleave', toDo);
+                }
+                else {
+                    e.click();
+                }
+            }
+            else if (toDo !== undefined) {
+                var x = e;
+                e.addEventListener('mouseleave', function (event) {
+                    if (x.querySelector(element) == event.target) {
+                        let xe = x.querySelector(element);
+                        xe.prototype.toDo = toDo;
+                        xe.toDo();
+                    }
+                });
+            }
+        }
+        return this;
+    }
     get(index) {
         if (index != undefined) {
             if (this.node[index] == undefined)
-                throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[" + index + "]");
+                throw new IndexOutOfArrayExecption('ExtJsObject.get undefined index node[' + index + ']');
             return this.node[index];
         }
         else {
             if (this.node[0] == undefined)
-                throw new IndexOutOfArrayExecption("ExtJsObject.get undefined index node[0]");
+                throw new IndexOutOfArrayExecption('ExtJsObject.get undefined index node[0]');
             return this.node[0];
         }
+    }
+    exists(index) {
+        if (index != undefined)
+            return this.node[index] != undefined;
+        else
+            return this.node.length != 0;
     }
     height(value) {
         for (var i = 0; i < this.node.length; i++) {
@@ -122,6 +221,9 @@ class ExtJsObject {
             e.classList.add(classx);
         }
         return this;
+    }
+    hasClass(classx) {
+        return this.node[0].classList.contains(classx);
     }
     removeClass(classx) {
         for (var i = 0; i < this.node.length; i++) {
@@ -166,7 +268,27 @@ class ExtJsObject {
             return this;
         }
     }
-    parent(selector) {
+    attr(attr, value, i) {
+        var y = i;
+        if (i == undefined) {
+            i = 0;
+        }
+        if (value == undefined) {
+            return this.node[i].getAttribute(attr);
+        }
+        else if (y != undefined) {
+            this.node[i].style[attr] = value;
+            return this;
+        }
+        else {
+            for (let i = 0; i < this.node.length; i++) {
+                var e = this.node[i];
+                e.setAttribute(attr, value);
+            }
+            return this;
+        }
+    }
+    parent(selector = undefined) {
         var parents = [];
         for (var i = 0; i < this.node.length; i++) {
             var e = this.node[i];
@@ -183,7 +305,7 @@ class ExtJsObject {
         if (text != undefined) {
             for (var i = 0; i < this.node.length; i++) {
                 var e = this.node[i];
-                if (typeof (text) === "string" || typeof (text) === "number") {
+                if (typeof text === 'string' || typeof text === 'number') {
                     e.value = text;
                 }
             }
@@ -199,12 +321,12 @@ class ExtJsObject {
             var e = this.node[i];
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener("keypress", toDo);
+                    e.addEventListener('keypress', toDo);
                 }
             }
             else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener("keypress", function (event) {
+                e.addEventListener('keypress', function (event) {
                     if (x.querySelector(element) == event.target) {
                         let xe = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -220,12 +342,12 @@ class ExtJsObject {
             var e = this.node[i];
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener("input", toDo);
+                    e.addEventListener('input', toDo);
                 }
             }
             else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener("input", function (event) {
+                e.addEventListener('input', function (event) {
                     if (x.querySelector(element) == event.target) {
                         let xe = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -241,12 +363,33 @@ class ExtJsObject {
             var e = this.node[i];
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener("keydown", toDo);
+                    e.addEventListener('keydown', toDo);
                 }
             }
             else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener("keydown", function (event) {
+                e.addEventListener('keydown', function (event) {
+                    if (x.querySelector(element) == event.target) {
+                        let xe = x.querySelector(element);
+                        xe.prototype.toDo = toDo;
+                        xe.toDo();
+                    }
+                });
+            }
+        }
+        return this;
+    }
+    change(toDo, element) {
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            if (element === undefined) {
+                if (toDo !== undefined) {
+                    e.addEventListener('change', toDo);
+                }
+            }
+            else if (toDo !== undefined) {
+                var x = e;
+                e.addEventListener('change', function (event) {
                     if (x.querySelector(element) == event.target) {
                         let xe = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -262,12 +405,12 @@ class ExtJsObject {
             var e = this.node[i];
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener("keyup", toDo);
+                    e.addEventListener('keyup', toDo);
                 }
             }
             else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener("keyup", function (event) {
+                e.addEventListener('keyup', function (event) {
                     if (x.querySelector(element) == event.target) {
                         let xe = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -278,103 +421,97 @@ class ExtJsObject {
         }
         return this;
     }
+    prevSibling() {
+        let siblings = [];
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            siblings.push(e.previousSibling);
+        }
+        return $(siblings);
+    }
+    nextSibling() {
+        let siblings = [];
+        for (var i = 0; i < this.node.length; i++) {
+            var e = this.node[i];
+            siblings.push(e.nextSibling);
+        }
+        return $(siblings);
+    }
+    appendTo(el) {
+        let element = this.get(0);
+        let parent = el.get(0);
+        parent.appendChild(element);
+    }
+    count() {
+        return this.node.length;
+    }
+    forEach(callback) {
+        for (let i = 0; i < this.node.length; i++) {
+            const element = this.node[i];
+            callback.bind(element)(i);
+        }
+        return this;
+    }
+    cssObj(obj) {
+        let keys = Object.keys(obj);
+        keys.forEach(key => {
+            this.css(key, obj[key]);
+        });
+        return this;
+    }
+    children(selector) {
+        return $(this.node[0].querySelectorAll(selector));
+    }
+    only(index) {
+        return $(this.node[index]);
+    }
 }
 class AjaxRequest {
-    GET(url, callback, error_callback) {
-        var xhttp = new XMLHttpRequest();
+    request(method, url, data, sucess, error) {
+        let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
             if (xhttp.readyState == 4 && xhttp.status == 200) {
-                callback(xhttp.responseText);
+                sucess(xhttp.responseText);
             }
             else if (xhttp.readyState == 4) {
-                if (error_callback != undefined) {
+                if (error != undefined) {
                     try {
-                        error_callback();
+                        error();
                     }
-                    catch (e) {
-                    }
+                    catch (e) { }
                 }
             }
         };
-        xhttp.open("GET", url, true);
-        xhttp.send();
-    }
-    DELETE(url, callback, error_callback) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                callback(xhttp.responseText);
-            }
-            else if (xhttp.readyState == 4) {
-                if (error_callback != undefined) {
-                    try {
-                        error_callback();
-                    }
-                    catch (e) {
-                    }
+        xhttp.open(method == 'GET' || method == 'DELETE' ? 'GET' : 'POST', url, true);
+        let d = '';
+        if (data != undefined) {
+            let keys = Object.keys(data);
+            for (let i = 0; i < keys.length; i++) {
+                if (i !== 0) {
+                    d = d + '&';
                 }
+                d = d + keys[i] + '=' + data[keys[i]];
             }
-        };
-        xhttp.open("GET", url, true);
-        xhttp.setRequestHeader("x-http-method-override", "DELETE");
-        xhttp.send();
-    }
-    POST(url, data, callback, error_callback) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                callback(xhttp.responseText);
-            }
-            else if (xhttp.readyState == 4) {
-                if (error_callback != undefined) {
-                    try {
-                        error_callback();
-                    }
-                    catch (e) {
-                    }
-                }
-            }
-        };
-        xhttp.open("POST", url, true);
-        var keys = Object.keys(data);
-        var d = "";
-        for (var i = 0; i < keys.length; i++) {
-            if (i !== 0) {
-                d = d + "&";
-            }
-            d = d + keys[i] + "=" + data[keys[i]];
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         }
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(d);
+        if (method == 'PUT' || method == 'DELETE')
+            xhttp.setRequestHeader('x-http-method-override', method);
+        if (d != '')
+            xhttp.send(d);
+        else
+            xhttp.send();
     }
-    PUT(url, data, callback, error_callback) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                callback(xhttp.responseText);
-            }
-            else if (xhttp.readyState == 4) {
-                if (error_callback != undefined) {
-                    try {
-                        error_callback();
-                    }
-                    catch (e) {
-                    }
-                }
-            }
-        };
-        xhttp.open("POST", url, true);
-        var keys = Object.keys(data);
-        var d = "";
-        for (var i = 0; i < keys.length; i++) {
-            if (i !== 0) {
-                d = d + "&";
-            }
-            d = d + keys[i] + "=" + data[keys[i]];
-        }
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.setRequestHeader("x-http-method-override", "PUT");
-        xhttp.send(d);
+    GET(url, callback, error_callback = undefined) {
+        return this.request('GET', url, undefined, callback, error_callback);
+    }
+    DELETE(url, callback, error_callback = undefined) {
+        return this.request('DELETE', url, undefined, callback, error_callback);
+    }
+    POST(url, data, callback, error_callback = undefined) {
+        return this.request('POST', url, data, callback, error_callback);
+    }
+    PUT(url, data, callback, error_callback = undefined) {
+        return this.request('PUT', url, data, callback, error_callback);
     }
 }
 var AR = new AjaxRequest();
