@@ -1,0 +1,36 @@
+{
+  "name": "extjs",
+  "version": "2.0.0",
+  "description": "A javascript framework for building web pages",
+  "main": "index.js",
+  "scripts": {
+    "prod": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonLoir/ExtJs.git"
+  },
+  "keywords": [
+    "extjs",
+    "component",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Simon Loir",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SimonLoir/ExtJs/issues"
+  },
+  "homepage": "https://github.com/SimonLoir/ExtJs#readme",
+  "dependencies": {
+    "@types/node": "^12.6.9",
+    "css-loader": "^3.1.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}

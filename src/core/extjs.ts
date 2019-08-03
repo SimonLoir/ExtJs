@@ -1,13 +1,13 @@
-class IndexOutOfArrayExecption {
+export class IndexOutOfArrayExecption {
     public message: string;
     public name: string;
     constructor(message: string) {
         this.message = message;
-        this.name = 'IndexOutOfArrayException';
+        this.name = "IndexOutOfArrayException";
     }
 }
 
-class ExtJsObject {
+export class ExtJsObject {
     private node: Array<any>;
 
     public type: string;
@@ -17,7 +17,7 @@ class ExtJsObject {
     constructor(element?: any, e_index?: any) {
         var re;
 
-        if (typeof element === 'string') {
+        if (typeof element === "string") {
             re = document.querySelectorAll(element);
             if (e_index != undefined) {
                 re = [re[e_index]];
@@ -27,10 +27,10 @@ class ExtJsObject {
              * @param toDo function that is called when the document has been loaded
              */
             this.ready = function(toDo: () => void) {
-                document.addEventListener('DOMContentLoaded', toDo);
+                document.addEventListener("DOMContentLoaded", toDo);
             };
             return this;
-        } else if (typeof element === 'object') {
+        } else if (typeof element === "object") {
             if (element.length == undefined) {
                 re = [element];
             } else if (e_index != undefined) {
@@ -38,13 +38,13 @@ class ExtJsObject {
             } else {
                 re = element;
             }
-        } else if (element.type == 'ExtJsObject') {
+        } else if (element.type == "ExtJsObject") {
             return element;
         } else {
             return;
         }
 
-        this.type = 'ExtJsObject';
+        this.type = "ExtJsObject";
         this.node = re;
     }
 
@@ -57,7 +57,7 @@ class ExtJsObject {
             for (var i = 0; i < this.node.length; i++) {
                 var e = this.node[i];
 
-                if (typeof html === 'string' || typeof html === 'number') {
+                if (typeof html === "string" || typeof html === "number") {
                     e.innerHTML = html;
                 }
             }
@@ -76,7 +76,7 @@ class ExtJsObject {
             for (var i = 0; i < this.node.length; i++) {
                 var e = this.node[i];
 
-                if (typeof text === 'string' || typeof text === 'number') {
+                if (typeof text === "string" || typeof text === "number") {
                     e.innerText = text;
                 }
             }
@@ -96,13 +96,13 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('click', toDo);
+                    e.addEventListener("click", toDo);
                 } else {
                     e.click();
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('click', function(event: MouseEvent) {
+                e.addEventListener("click", function(event: MouseEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -124,13 +124,13 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('dblclick', toDo);
+                    e.addEventListener("dblclick", toDo);
                 } else {
                     e.dblclick();
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('dblclick', function(event: MouseEvent) {
+                e.addEventListener("dblclick", function(event: MouseEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -156,13 +156,13 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('mouseover', toDo);
+                    e.addEventListener("mouseover", toDo);
                 } else {
                     e.click();
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('mouseover', function(event: MouseEvent) {
+                e.addEventListener("mouseover", function(event: MouseEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -184,13 +184,13 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('mouseleave', toDo);
+                    e.addEventListener("mouseleave", toDo);
                 } else {
                     e.click();
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('mouseleave', function(event: MouseEvent) {
+                e.addEventListener("mouseleave", function(event: MouseEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -210,13 +210,13 @@ class ExtJsObject {
         if (index != undefined) {
             if (this.node[index] == undefined)
                 throw new IndexOutOfArrayExecption(
-                    'ExtJsObject.get undefined index node[' + index + ']'
+                    "ExtJsObject.get undefined index node[" + index + "]"
                 );
             return this.node[index];
         } else {
             if (this.node[0] == undefined)
                 throw new IndexOutOfArrayExecption(
-                    'ExtJsObject.get undefined index node[0]'
+                    "ExtJsObject.get undefined index node[0]"
                 );
             return this.node[0];
         }
@@ -387,7 +387,7 @@ class ExtJsObject {
             for (var i = 0; i < this.node.length; i++) {
                 var e: HTMLTextAreaElement = this.node[i];
 
-                if (typeof text === 'string' || typeof text === 'number') {
+                if (typeof text === "string" || typeof text === "number") {
                     e.value = text;
                 }
             }
@@ -408,11 +408,11 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('keypress', toDo);
+                    e.addEventListener("keypress", toDo);
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('keypress', function(event: KeyboardEvent) {
+                e.addEventListener("keypress", function(event: KeyboardEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -434,11 +434,11 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('input', toDo);
+                    e.addEventListener("input", toDo);
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('input', function(event: KeyboardEvent) {
+                e.addEventListener("input", function(event: KeyboardEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -460,11 +460,11 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('keydown', toDo);
+                    e.addEventListener("keydown", toDo);
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('keydown', function(event: KeyboardEvent) {
+                e.addEventListener("keydown", function(event: KeyboardEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -486,11 +486,11 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('change', toDo);
+                    e.addEventListener("change", toDo);
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('change', function(event: KeyboardEvent) {
+                e.addEventListener("change", function(event: KeyboardEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -512,11 +512,11 @@ class ExtJsObject {
 
             if (element === undefined) {
                 if (toDo !== undefined) {
-                    e.addEventListener('keyup', toDo);
+                    e.addEventListener("keyup", toDo);
                 }
             } else if (toDo !== undefined) {
                 var x = e;
-                e.addEventListener('keyup', function(event: KeyboardEvent) {
+                e.addEventListener("keyup", function(event: KeyboardEvent) {
                     if (x.querySelector(element) == event.target) {
                         let xe: any = x.querySelector(element);
                         xe.prototype.toDo = toDo;
@@ -622,27 +622,27 @@ class AjaxRequest {
             }
         };
         xhttp.open(
-            method == 'GET' || method == 'DELETE' ? 'GET' : 'POST',
+            method == "GET" || method == "DELETE" ? "GET" : "POST",
             url,
             true
         );
-        let d = '';
+        let d = "";
         if (data != undefined) {
             let keys = Object.keys(data);
             for (let i = 0; i < keys.length; i++) {
                 if (i !== 0) {
-                    d = d + '&';
+                    d = d + "&";
                 }
-                d = d + keys[i] + '=' + data[keys[i]];
+                d = d + keys[i] + "=" + data[keys[i]];
             }
             xhttp.setRequestHeader(
-                'Content-type',
-                'application/x-www-form-urlencoded'
+                "Content-type",
+                "application/x-www-form-urlencoded"
             );
         }
-        if (method == 'PUT' || method == 'DELETE')
-            xhttp.setRequestHeader('x-http-method-override', method);
-        if (d != '') xhttp.send(d);
+        if (method == "PUT" || method == "DELETE")
+            xhttp.setRequestHeader("x-http-method-override", method);
+        if (d != "") xhttp.send(d);
         else xhttp.send();
     }
 
@@ -656,7 +656,7 @@ class AjaxRequest {
         callback: (data: string) => void,
         error_callback: () => void = undefined
     ) {
-        return this.request('GET', url, undefined, callback, error_callback);
+        return this.request("GET", url, undefined, callback, error_callback);
     }
     /**
      * @param {String} url URL of the resource
@@ -668,7 +668,7 @@ class AjaxRequest {
         callback: (data: string) => void,
         error_callback: () => void = undefined
     ) {
-        return this.request('DELETE', url, undefined, callback, error_callback);
+        return this.request("DELETE", url, undefined, callback, error_callback);
     }
     /**
      * @param {String} url URL of the resource
@@ -682,7 +682,7 @@ class AjaxRequest {
         callback: (data: string) => void,
         error_callback: () => void = undefined
     ) {
-        return this.request('POST', url, data, callback, error_callback);
+        return this.request("POST", url, data, callback, error_callback);
     }
     /**
      * @param {String} url URL of the resource
@@ -696,16 +696,16 @@ class AjaxRequest {
         callback: (data: string) => void,
         error_callback: () => void = undefined
     ) {
-        return this.request('PUT', url, data, callback, error_callback);
+        return this.request("PUT", url, data, callback, error_callback);
     }
 }
-var AR = new AjaxRequest();
+export var AR = new AjaxRequest();
 /**
  *
  * @param {String|Object|Array} e
  * @param {Number} index
  */
-function $(e?: any, index?: any): ExtJsObject {
+export function $(e?: any, index?: any): ExtJsObject {
     if (e != undefined) {
         return new ExtJsObject(e, index);
     } else {
