@@ -32,7 +32,7 @@ export function html(html: TemplateStringsArray, ...args: any[]): Component[] {
     const baseVDomElement: VDomElement = {
         tagName: undefined,
         props: [],
-        text: '',
+        text: ''
     };
     let currentElement: VDomElement = undefined;
     let buffer = '';
@@ -40,20 +40,37 @@ export function html(html: TemplateStringsArray, ...args: any[]): Component[] {
         const char = html_real_code[i];
 
         if (currentElement) {
+            if (currentElement.tagName) {
+                if (char == '>') {
+                    virtual_html_representation.push(currentElement);
+                    console.log(buffer);
+                    buffer = '';
+                    currentElement = undefined;
+                } else buffer += char;
+            } else {
+                if (char == ' ') {
+                    //console.log(buffer);
+                    currentElement.tagName = buffer;
+                    buffer = '';
+                } else {
+                    buffer += char;
+                }
+            }
         } else {
             if (char == '<') {
                 virtual_html_representation.push({
                     tagName: 'span',
                     props: {},
-                    text: buffer,
+                    text: buffer
                 });
                 buffer = '';
+                currentElement = baseVDomElement;
             } else {
                 buffer += char;
             }
         }
     }
-
+    console.log(virtual_html_representation);
     console.log(html_real_code);
     return [];
 }
@@ -78,7 +95,7 @@ function StateChangeObserverer() {
             get,
             set,
             enumerable: true,
-            configurable: true,
+            configurable: true
         });
     };
 }
