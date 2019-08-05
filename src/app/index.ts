@@ -1,3 +1,11 @@
-import { html } from "../core/component";
+import render from "../core";
+import { html, ExtJsDefaultComponent } from "../core/component";
 
-html`<dd></dd>`
+render(
+    document.body,
+    new ExtJsDefaultComponent(html`
+        <button onclick=${() => console.log("hello world")}>
+            ${"Content"}
+        </button>
+    `)
+);
